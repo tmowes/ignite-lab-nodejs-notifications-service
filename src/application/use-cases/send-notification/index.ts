@@ -1,18 +1,9 @@
+import { Content } from '@application/entities/content'
+import { Notification } from '@application/entities/notification'
+import { NotificationsRepository } from '@application/repositories/notifications-repository'
 import { Injectable } from '@nestjs/common'
 
-import { Content } from '../entities/content'
-import { Notification } from '../entities/notification'
-import { NotificationsRepository } from '../repositories/notifications-repository'
-
-export type SendNotificationRequest = {
-  recipientId: string
-  content: string
-  category: string
-}
-
-export type SendNotificationResponse = {
-  notification: Notification
-}
+import { SendNotificationRequest, SendNotificationResponse } from './types'
 
 @Injectable()
 export class SendNotification {

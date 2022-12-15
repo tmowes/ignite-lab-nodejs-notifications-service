@@ -1,15 +1,8 @@
 import { randomUUID } from 'node:crypto'
+import { Replace } from '@helpers/Replace'
 
-import { Replace } from '../../helpers/Replace'
-import { Content } from './content'
-
-export type NotificationProps = {
-  recipientId: string
-  content: Content
-  category: string
-  readAt?: Date | null
-  createdAt: Date
-}
+import { Content } from '../content'
+import { NotificationProps } from './types'
 
 export class Notification {
   private _id: string
@@ -49,12 +42,24 @@ export class Notification {
     return this.props.category
   }
 
-  public set readAt(readAt: Date | null | undefined) {
-    this.props.readAt = readAt
+  public read() {
+    this.props.readAt = new Date()
+  }
+
+  public unread() {
+    this.props.readAt = null
   }
 
   public get readAt(): Date | null | undefined {
     return this.props.readAt
+  }
+
+  public cancel() {
+    this.props.canceledAt = new Date()
+  }
+
+  public get canceledAt(): Date | null | undefined {
+    return this.props.canceledAt
   }
 
   public get createdAt(): Date {
